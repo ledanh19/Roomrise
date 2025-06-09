@@ -14,13 +14,8 @@ export class AllExceptionsFilter implements ExceptionFilter {
     const request = ctx.getRequest();
     const response = ctx.getResponse();
 
-    let httpStatus:
-      | HttpStatus.INTERNAL_SERVER_ERROR
-      | HttpStatus.UNAUTHORIZED
-      | HttpStatus.FORBIDDEN
-      | HttpStatus.NOT_FOUND
-      | HttpStatus.BAD_REQUEST
-      | number;
+    // Narrow type to known HttpStatus values while allowing custom numeric codes
+    let httpStatus: HttpStatus | number;
     let message: string | object;
 
     if (exception instanceof HttpException) {
